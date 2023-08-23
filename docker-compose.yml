@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+
+  app:
+    container_name: 'Cloud_storage'
+    build: ./
+    ports:
+      - '8081:8081'
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/cloud_database
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+
+  database:
+    image: postgres:15
+    container_name: 'Cloud_database'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: cloud_database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
